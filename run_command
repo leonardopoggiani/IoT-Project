@@ -1,0 +1,8 @@
+make TARGET=cc26x0-cc13x0 BOARD=/launchpad/cc2650 PORT=/dev/ttyACM0 NODEID=0x0001 leds.upload
+
+make login TARGET=cc26x0-cc13x0 BOARD=/launchpad/cc2650 PORT=/dev/ttyACM0
+
+[INFO: Main      ] Link-layer address: 0012.4b00.0f82.0001
+
+[INFO: Main      ] Node ID: 1
+
