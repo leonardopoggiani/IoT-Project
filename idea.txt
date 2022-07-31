@@ -1,0 +1,11 @@
+14. Liquid Level Monitoring System
+
+This IoT-based project involves building a liquid level monitoring system that can
+ remotely monitor a particular liquid’s level and prevent it from overflowing.
+ This project holds immense value for the industrial sector that uses large volumes of fluids in their day-to-day operations. 
+Apart from detecting a liquid’s level, this monitoring system can also be used to track the usage of 
+specific chemicals and to detect leaks in pipelines. 
+
+The system is fitted with ultrasonic, conductive, and float sensors. 
+A WiFi module helps connect the system with the Internet and facilitates data transmission. 
+Four ultrasonic sensors help transmit the data on the liquid level and alert the user on the same. 
