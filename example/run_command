@@ -6,3 +6,4 @@ make login TARGET=cc26x0-cc13x0 BOARD=/launchpad/cc2650 PORT=/dev/ttyACM0
 
 [INFO: Main      ] Node ID: 1
 
+make TARGET=nrf52840 BOARD=dongle hello-world.dfu-upload PORT=/dev/ttyACMx
