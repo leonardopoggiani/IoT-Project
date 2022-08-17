@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Aug 10 18:11:21 2022
+# Make data base, printed on Wed Aug 17 16:48:53 2022
 
 # Variables
 
@@ -47,7 +47,7 @@ QT_ACCESSIBILITY = 1
 # environment
 SNAP_INSTANCE_NAME = code
 # environment
-GDK_PIXBUF_MODULEDIR = /snap/code/103/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+GDK_PIXBUF_MODULEDIR = /snap/code/104/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -63,11 +63,11 @@ XDG_DATA_DIRS = /usr/share/ubuntu:/home/leonardo/.local/share/flatpak/exports/sh
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/leonardo/.config/Code/CachedData/da76f93349a72022ca4670c1b84860304616aaa2
+VSCODE_CODE_CACHE_PATH = /home/leonardo/.config/Code/CachedData/6d9b74a70ca9c7733b29f0456fd8195364076dda
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.OJE0Q1
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.21QOQ1
 # default
 .LOADED := 
 # default
@@ -105,7 +105,7 @@ SNAP_REEXEC =
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 562832
+VSCODE_PID = 473901
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -113,7 +113,7 @@ XDG_SESSION_TYPE = wayland
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/poggio-linux:@/tmp/.ICE-unix/2700,unix/poggio-linux:/tmp/.ICE-unix/2700
+SESSION_MANAGER = local/poggio-linux:@/tmp/.ICE-unix/2786,unix/poggio-linux:/tmp/.ICE-unix/2786
 # automatic
 *F = $(notdir $*)
 # environment
@@ -159,11 +159,11 @@ SNAP_USER_COMMON = /home/leonardo/snap/code/common
 # environment
 LC_TIME = it_IT.UTF-8
 # environment
-SNAP = /snap/code/103
+SNAP = /snap/code/104
 # environment
-INVOCATION_ID = e5214e3e02534f1987f5bacd2030e11d
+INVOCATION_ID = e2cb1bba46b0458291750e06696788de
 # environment
-SNAP_REVISION = 103
+SNAP_REVISION = 104
 # environment
 SNAP_REAL_HOME = /home/leonardo
 # environment
@@ -199,7 +199,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := 
 # environment
-SYSTEMD_EXEC_PID = 2729
+SYSTEMD_EXEC_PID = 2804
 # environment
 DISPLAY = :0
 # environment
@@ -211,17 +211,17 @@ MAKE_VERSION := 4.3
 # environment
 DISABLE_WAYLAND = 1
 # environment
-SNAP_DATA = /var/snap/code/103
+SNAP_DATA = /var/snap/code/104
 # environment
 SNAP_CONTEXT = rnyCV-4t8YJODfRIjTZkfO0qHwz8P4jbuhznbAx28RkvW8kRbGjI
 # environment
-MANAGERPID = 2518
+MANAGERPID = 2569
 # environment
 LC_MEASUREMENT = it_IT.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 562787
+GIO_LAUNCHED_DESKTOP_FILE_PID = 473824
 # environment
-_ = /snap/code/103/usr/share/code/code
+_ = /snap/code/104/usr/share/code/code
 # environment
 LC_PAPER = it_IT.UTF-8
 # environment
@@ -229,7 +229,7 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/leonardo/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-JOURNAL_STREAM = 8:38268
+JOURNAL_STREAM = 8:39475
 # environment
 GOLANG_EXECUTABLE = go
 # environment
@@ -243,11 +243,11 @@ QT_IM_MODULE = ibus
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-cba099ec-1.70.0-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-cba099ec-1.70.1-main.sock
 # environment
 SNAP_NAME = code
 # environment
-GSETTINGS_SCHEMA_DIR = /snap/code/103/usr/share/glib-2.0/schemas
+GSETTINGS_SCHEMA_DIR = /snap/code/104/usr/share/glib-2.0/schemas
 # environment
 IM_CONFIG_PHASE = 1
 # default
@@ -255,7 +255,7 @@ IM_CONFIG_PHASE = 1
 # automatic
 <F = $(notdir $<)
 # environment
-SNAP_VERSION = da76f933
+SNAP_VERSION = 6d9b74a7
 # default
 SUFFIXES := 
 # environment
@@ -269,7 +269,7 @@ SNAP_COMMON = /var/snap/code/common
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
 # environment
-SNAP_USER_DATA = /home/leonardo/snap/code/103
+SNAP_USER_DATA = /home/leonardo/snap/code/104
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
@@ -288,9 +288,9 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 66306, inode 6160623): 11 files, no impossibilities.
+# . (device 66306, inode 6160623): 13 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -340,12 +340,12 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 19 / storage = 192 B / avg = 10 B
-# current buf: size = 8162 B / used = 192 B / count = 19 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 21 / storage = 233 B / avg = 11 B
+# current buf: size = 8162 B / used = 233 B / count = 21 / avg = 11 B
 
-# strcache performance: lookups = 22 / hit rate = 13%
+# strcache performance: lookups = 24 / hit rate = 12%
 # hash-table stats:
-# Load=19/8192=0%, Rehash=0, Collisions=0/22=0%
-# Finished Make data base on Wed Aug 10 18:11:21 2022
+# Load=21/8192=0%, Rehash=0, Collisions=0/24=0%
+# Finished Make data base on Wed Aug 17 16:48:53 2022
 
  
