@@ -59,6 +59,7 @@ static void res_put_post_handler(coap_message_t *request, coap_message_t *respon
 			LOG_INFO("Discharging water! \n");
 		}else if(success && strcmp((char*)payload, JSON_NORMAL) == 0) {
 			discharging = false;
+			current_risk = LOW;
 			LOG_INFO("Normal operativity! \n");
 		}
         else {
@@ -89,9 +90,9 @@ static void simulate_landside_level_change(){
 	if(discharging) {
 		landside_level = landside_level - variation;
 
-		int parteIntera = (int) landside_level;
-		int parteDecimale = (int)((landside_level - parteIntera) * 10);
-		printf("landside_level: %d.%d \n", parteIntera, parteDecimale);
+		int intLevel = (int) landside_level;
+		int decimalLevel = (int)((landside_level - intLevel) * 10);
+		printf("[DISCHARGING] landside_level: %d.%d \n", intLevel, decimalLevel);
 	} else {
 		if((rand()%100) < 40) {
 			if(type >= 35)
@@ -99,9 +100,9 @@ static void simulate_landside_level_change(){
 			else if(type < 20 )
 				landside_level = landside_level - variation;
 
-			int parteIntera = (int) landside_level;
-			int parteDecimale = (int)((landside_level - parteIntera) * 10);
-			printf("landside_level: %d.%d \n", parteIntera, parteDecimale);
+			int intLevel = (int) landside_level;
+			int decimalLevel = (int)((landside_level - intLevel) * 10);
+			printf("landside_level: %d.%d \n", decimalLevel, decimalLevel);
 		}	
 	}
 } 
@@ -111,11 +112,11 @@ static void get_landside_level_handler(coap_message_t *request, coap_message_t *
 	char message[30];
 	int len;
 	sprintf(message, "%g", landside_level);
-	int parteIntera = (int) landside_level;
-	int parteDecimale = (int)((landside_level - parteIntera) * 10);
-	int parteInteraOld = (int) old_landside_level;
-	int parteDecimaleOld = (int)((old_landside_level - parteInteraOld) * 10);
-	sprintf(json_response, "{\"landside_level\": %d.%d, \"old_landside_level\": %d.%d}", parteIntera, parteDecimale, parteInteraOld, parteDecimaleOld);
+	int intLevel = (int) landside_level;
+	int decimalLevel = (int)((landside_level - intLevel) * 10);
+	int intLevelOld = (int) old_landside_level;
+	int decimalLevelOld = (int)((old_landside_level - intLevelOld) * 10);
+	sprintf(json_response, "{\"landside_level\": %d.%d, \"old_landside_level\": %d.%d}", intLevel, decimalLevel, intLevelOld, decimalLevelOld);
 
 	coap_set_header_content_format(response, APPLICATION_JSON);
 	coap_set_header_etag(response, (uint8_t *)&len, 1);
@@ -148,6 +149,7 @@ static void landside_level_event_handler(void)
 			leds_on(LEDS_RED);
 			break;
 		case DIS:
+			// blinking
 			leds_single_off(LEDS_GREEN);
 			leds_single_off(LEDS_RED);
 			leds_on(LEDS_GREEN);
@@ -161,7 +163,7 @@ static void landside_level_event_handler(void)
 
 	if(old_landside_level != landside_level)
 	{
-		printf("There is a change, I'm going to notify it!\n");
+		printf("Change in the level, must notify it\n");
   		coap_notify_observers(&landside_level_sensor);
 	}
 }

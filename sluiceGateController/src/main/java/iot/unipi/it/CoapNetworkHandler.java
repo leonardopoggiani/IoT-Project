@@ -16,11 +16,11 @@ import iot.unipi.it.Utils;
 public class CoapNetworkHandler{
 
 	private final String JSON_LEVEL_VERY_HIGH = "{\"type\":\"level\", \"cause\": \"VERY_HIGH\"}";
-	private final String JSON_LEVEL_HIGH = "{\"type\":\"level\", \"cause\": \"HIGH\"}";
-	private final String JSON_LEVEL_MEDIUM = "{\"type\":\"level\", \"cause\": \"MEDIUM\"}";
-	private final String JSON_LEVEL_LOW = "{\"type\":\"level\", \"cause\": \"LOW\"}";
+	private final String JSON_LEVEL_HIGH = 		"{\"type\":\"level\", \"cause\": \"HIGH\"}";
+	private final String JSON_LEVEL_MEDIUM = 	"{\"type\":\"level\", \"cause\": \"MEDIUM\"}";
+	private final String JSON_LEVEL_LOW = 		"{\"type\":\"level\", \"cause\": \"LOW\"}";
 	private final String JSON_DISCHARGE_WATER = "{\"type\":\"discharge\"}";
-	private final String JSON_NORMAL = "{\"type\":\"normal\"}";
+	private final String JSON_NORMAL = 			"{\"type\":\"normal\"}";
 
 	private CoapClient client_LandsideLevelControllerSensor = null;
 	private double level_target;
@@ -48,7 +48,6 @@ public class CoapNetworkHandler{
 		client_LandsideLevelControllerSensor.observe(
 			new CoapHandler() {
 				public void onLoad(CoapResponse response) {
-					System.out.println("Response: " + response.getResponseText());
 					if(!response.getResponseText().equals(""))
 						handleLevelChange(response);
 				}
@@ -69,10 +68,10 @@ public class CoapNetworkHandler{
 		DbUtility.insertLevel(new_levelValue);
 		String flood_risk = "";
 
-		System.out.println("landsideLevel: " + new_levelValue + " [ " + (level_target - acceptableRange) + " - " + (level_target + acceptableRange) + " ] , old: " + old_levelValue);
+		System.out.println("[CoapNetworkHandler] landsideLevel: " + new_levelValue + " [ " + (level_target - acceptableRange) + " - " + (level_target + acceptableRange) + " ] , old: " + old_levelValue);
 
 		if(new_levelValue > level_target + acceptableRange){
-			System.out.println("Level is too high");
+			System.out.println("[CoapNetworkHandler] Level is too high");
 			if(new_levelValue - old_levelValue >= 0.4) {
 				// level is raising very fast, there may be a flood
 				flood_risk = JSON_LEVEL_VERY_HIGH;
@@ -91,7 +90,7 @@ public class CoapNetworkHandler{
 				}	
 			}, flood_risk, MediaTypeRegistry.APPLICATION_JSON);
 		} else if(new_levelValue < level_target - acceptableRange) {
-			System.out.println("Level is too low");
+			System.out.println("[CoapNetworkHandler] Level is too low");
 			flood_risk = JSON_LEVEL_LOW;
 			client_LandsideLevelControllerSensor.post(new CoapHandler() {
 				public void onLoad(CoapResponse response) {
@@ -106,7 +105,7 @@ public class CoapNetworkHandler{
 			}, JSON_LEVEL_LOW, MediaTypeRegistry.APPLICATION_JSON);
 		} else {
 			flood_risk = JSON_LEVEL_MEDIUM;
-			System.out.println("Level is normal");
+			System.out.println("[CoapNetworkHandler] Level is normal");
 			client_LandsideLevelControllerSensor.post(new CoapHandler() {
 				public void onLoad(CoapResponse response) {
 					if(response == null){
@@ -125,7 +124,7 @@ public class CoapNetworkHandler{
 			if(new_levelValue < level_target + acceptableRange) {
 				opening =  JSON_NORMAL;
 			} else {
-				System.out.println("Need to discharge water from the canal, [OPEN]\n");
+				System.out.println("[CoapNetworkHandler] Need to discharge water from the canal!\n");
 				opening = JSON_DISCHARGE_WATER;
 			}
 

@@ -1,7 +1,6 @@
 #ifndef SENSOR_CONSTANTS_H
 #define SENSOR_CONSTANTS_H
 
-
 /* Servers constants */
 #define SERVER_EP                                 "coap://[fd00::1]:5683"
 #define CONNECTION_TRY_INTERVAL                   1

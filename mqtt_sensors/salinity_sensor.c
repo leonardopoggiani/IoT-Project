@@ -1,6 +1,3 @@
-// MQTT sensor that publishes the current temperature value and receives the desired temperature
-
-/*---------------------------------------------------------------------------*/
 #include "contiki.h"
 #include "net/routing/routing.h"
 #include "mqtt.h"
@@ -60,9 +57,7 @@ static struct mqtt_connection conn;
 
 static char client_id[BUFFER_SIZE];
 
-//topic in which the sensor will publish
 #define PUB_TOPIC	"current_salinity"
-//topic to which the sensor has to be subscribed
 #define SUB_TOPIC	"sluice_state"
 
 #define JSON_GATE_OPEN	 "{\"sluice_on\":true}"
@@ -75,7 +70,7 @@ static void simulate_salinity_change(){
     double variation = 0.0;
 
 	if(sluice_on) {
-		printf("[GATE] The gate is open, salinity raising\n");
+		printf("[SLUICE_STATE] The gate is open, salinity raising\n");
 		if((rand()%100) < 60) {
             variation = (double)(rand() % 5) / 8;
 			current_salinity = current_salinity + variation;
@@ -90,7 +85,7 @@ static void simulate_salinity_change(){
 			leds_on(LEDS_GREEN);
 		}
 	} else {
-		printf("[GATE] Decreasing the salinity, the gate is closed\n");
+		printf("[SLUICE_STATE] Decreasing the salinity, the gate is closed\n");
 		variation = (double)(rand() % 5) / 15;
 		current_salinity = current_salinity - variation;
 		leds_single_off(LEDS_GREEN);
@@ -173,8 +168,6 @@ PROCESS_THREAD(mqtt_salinity_sensor, ev, data){
 	mqtt_status_t status;
 
 	printf("MQTT client salinity sensor process\n");
-
-	// Initialize the ClientID as MAC address
 	
   	snprintf(client_id, BUFFER_SIZE, "%02x%02x%02x%02x%02x%02x",
 					linkaddr_node_addr.u8[0], linkaddr_node_addr.u8[1],
@@ -185,10 +178,7 @@ PROCESS_THREAD(mqtt_salinity_sensor, ev, data){
 	mqtt_register(&conn, &mqtt_salinity_sensor, client_id, mqtt_event,
                   MAX_TCP_SEGMENT_SIZE);
 
-	//Setting the initial state 
   	state=STATE_INIT;
-				    
-	// Initialize periodic timer to check the status 
 	etimer_set(&periodic_timer, MEASUREMENT_PERIOD);
 
 	while(1){
@@ -229,7 +219,6 @@ PROCESS_THREAD(mqtt_salinity_sensor, ev, data){
 				int parteIntera = (int) current_salinity;
 				int parteDecimale = (int)((current_salinity - parteIntera) * 10);
 				sprintf(app_buffer, "{\"current_salinity\":\"%d.%d\", \"sluice_state\": %s}", parteIntera, parteDecimale, sluice_state);
-				printf("APP_BUFFER: %s \n", app_buffer);
 				status = mqtt_publish(&conn, NULL, PUB_TOPIC, (uint8_t*) app_buffer, strlen(app_buffer), MQTT_QOS_LEVEL_0, MQTT_RETAIN_OFF);
 				if(status != MQTT_STATUS_OK){
 					LOG_ERR("Error during publishing a message\n");

@@ -15,25 +15,23 @@ public class DbUtility {
         String databaseName = "db_sluiceGate";
         
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");//checks if the Driver class exists (correctly available)
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             return databaseConnection;
         }
 
         try {
-            // DriverManager: The basic service for managing a set of JDBC drivers.
             databaseConnection = DriverManager.getConnection(
                     "jdbc:mysql://" + databaseIP + ":" + databasePort +
                             "/" + databaseName + "?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=CET",
                     databaseUsername,
                     databasePassword);
-            //The Driver Manager provides the connection specified in the parameter string
             if (databaseConnection == null) {
-                System.err.println("Connection to Db failed");
+                System.err.println("Connection to DB failed");
             }
         } catch (SQLException e) {
-        	System.err.println("MySQL Connection Failed!\n");
+        	System.err.println("MySQL connection Failed!\n");
             e.printStackTrace();
         }finally {
             return databaseConnection;

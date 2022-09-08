@@ -45,7 +45,7 @@ static void check_connection(){
 		LOG_INFO("Border Router not reachable\n");
 		etimer_reset(&wait_connectivity);
 	} else {
-		LOG_INFO("Now the Border Router is reachable\n");
+		LOG_INFO("Border Router is reachable\n");
 		connected = true;
 	}
 }
@@ -63,7 +63,7 @@ void client_chunk_handler(coap_message_t *response)
 	int len = coap_get_payload(response, &chunk);
 	printf("|%.*s", len, (char *)chunk);
 
-	if(strncmp((char*)chunk, "Registration Completed!", len) == 0){ 
+	if(strncmp((char*)chunk, "Registration completed!", len) == 0){ 
 		registered = true;
 	}else
 		etimer_set(&wait_registration, CLOCK_SECOND* REGISTRATION_TRY_INTERVAL);
@@ -85,7 +85,7 @@ PROCESS_THREAD(landside_level_server, ev, data)
 		check_connection();
 	}
 
-	LOG_INFO("I'm connected!\n");
+	LOG_INFO("[LANDSIDE_LEVEL] Connected!\n");
 
 	while(!registered){
 
@@ -102,7 +102,7 @@ PROCESS_THREAD(landside_level_server, ev, data)
 		PROCESS_WAIT_UNTIL(etimer_expired(&wait_registration));
 	}
 
-	LOG_INFO("Starting landside level Server\n");
+	LOG_INFO("[LANDSIDE_LEVEL] Starting landside level Server\n");
 
 	coap_activate_resource(&landside_level_sensor, "landside_level_sensor");
 

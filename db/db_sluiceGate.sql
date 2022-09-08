@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `db_sluiceGate` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `db_sluiceGate`;
 -- MySQL dump 10.13  Distrib 5.7.39, for Linux (x86_64)
 --
 -- Host: localhost    Database: db_sluiceGate
@@ -74,4 +76,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-17 10:46:39
+-- Dump completed on 2022-09-08 12:00:18

@@ -35,7 +35,7 @@ public class RegistrationServer extends CoapServer {
             if(deviceType.equals("level_controller"))
                 coapHandler.addLandsideLevelController(ipAddress);
 
-			exchange.respond(ResponseCode.CREATED, "Registration Completed!".getBytes(StandardCharsets.UTF_8));
+			exchange.respond(ResponseCode.CREATED, "Registration completed!".getBytes(StandardCharsets.UTF_8));
 		}
 	}
 

@@ -19,14 +19,11 @@ public class MqttClientCollector implements MqttCallback{
 	private final String JSON_GATE_OPEN = "{\"sluice_on\":true}";
 	private final String JSON_GATE_CLOSED = "{\"sluice_on\":false}";
 
-	//topic to be subscribed to
 	private final String subTopic = "current_salinity";
-	//topic to publish in
 	private final String pubTopic = "sluice_state"; 
 
 	private MqttClient mqttClient = null;
 
-	//level to be reached
 	private double targetSalinity = 0.0;
 	private double firstSalinityValue = 0;
 	private int acceptableRange = 0;
@@ -64,9 +61,9 @@ public class MqttClientCollector implements MqttCallback{
 				mqttClient.subscribe(subTopic);
 				System.out.println("Connection is restored");
 			}catch(MqttException me) {
-				System.out.println("I could not connect");
+				System.out.println("Connection problems..");
 			} catch (InterruptedException e) {
-				System.out.println("I could not connect");
+				System.out.println("Connection problems..");
 			}
 		}
 	}
@@ -74,15 +71,14 @@ public class MqttClientCollector implements MqttCallback{
 	public void messageArrived(String topic, MqttMessage message) throws Exception {
 		System.out.println("A new message at the topic " + topic + " has been received");
 		String receivedPayload = new String(message.getPayload());
-		System.out.println("Payload: " + receivedPayload);
 		Map<String, Object> receivedJson = Utils.jsonParser(receivedPayload);
 		String receivedSalinity_string = (String)receivedJson.get("current_salinity");
 
 		double receivedSalinity = Double.parseDouble(receivedSalinity_string);
-		System.out.println("receivedSalinity: " + receivedSalinity);
+		System.out.println("[MQTTClientCollector] receivedSalinity: " + receivedSalinity);
 
 		Boolean receivedState = (Boolean)receivedJson.get("sluice_state");
-		System.out.println("receivedState: " + receivedState);
+		System.out.println("[MQTTClientCollector] receivedSluiceState: " + receivedState);
 
 		if(firstSalinityValue == 0){
 			firstSalinityValue = receivedSalinity;
@@ -91,11 +87,11 @@ public class MqttClientCollector implements MqttCallback{
 			double averageSalinity = (firstSalinityValue + receivedSalinity) / 2;
 			DbUtility.insertSalinity(averageSalinity);
 			if(averageSalinity >= targetSalinity + acceptableRange){
-				System.out.println("Salinity level is too high, need to decrease it");
+				System.out.println("[MQTTClientCollector] Salinity level is too high, need to decrease it");
 				publish(pubTopic, JSON_GATE_CLOSED);
 			}
 			else if(averageSalinity < targetSalinity - acceptableRange){
-				System.out.println("Salinity level is too low, need to increase it");
+				System.out.println("[MQTTClientCollector] Salinity level is too low, need to increase it");
 				publish(pubTopic, JSON_GATE_OPEN);
 			}
 			firstSalinityValue = 0;

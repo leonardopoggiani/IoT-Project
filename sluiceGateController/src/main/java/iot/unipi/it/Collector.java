@@ -53,7 +53,7 @@ public class Collector extends CoapServer {
 			tokens = command.split(" ");
 			String insertedCommand = tokens[0];
 			if(insertedCommand.equals("!exit")){
-				System.out.println("Bye bye");
+				System.out.println("Closing application..");
 				System.exit(1);
 			}
 			else if(insertedCommand.equals("!commands")){
@@ -68,8 +68,8 @@ public class Collector extends CoapServer {
 				rs.changeTargetLevel(Double.parseDouble(tokens[1]));
 				System.out.println("Target landside water level value changed succesfully");
 			}
-			else if(insertedCommand.equals("!changeAccLandsideLevel")){
-				if(tokens.length < 2){
+			else if(insertedCommand.equals("!changeAcceptableLandsideLevel")){
+				if(tokens.length < 3){
 					System.out.println("Wrong command format");
 					printCommandError();
 					continue;
@@ -97,7 +97,7 @@ public class Collector extends CoapServer {
 		System.out.println("!exit: exit the program");
 		System.out.println("!commands: list possible commands");					
 		System.out.println("!changeTargetLandsideLevel [new_value]: set new target landside water level value");
-		System.out.println("!changeAccLandsideLevel [new_value]: set new acceptable range for the landside water level");
+		System.out.println("!changeAcceptableLandsideLevel [new_min_value] [new_max_value]: set new acceptable range for the landside water level");
 		System.out.println("!dischargeWater: discharge water to reduce level");
 		System.out.println("\n");
 	}

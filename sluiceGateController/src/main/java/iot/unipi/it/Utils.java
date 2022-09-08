@@ -12,7 +12,6 @@ import com.google.gson.JsonParseException;
 
 public final class Utils {
 	
-	//Function that parses a JSON message returning the corresponding Map of the key-value pairs contained in the JSON message. 
 	public static Map<String, Object> jsonParser(String requestText) {
 		Map<String, Object> responseJsonObject = new HashMap<String, Object>();
 		
@@ -22,14 +21,13 @@ public final class Utils {
         
 		} catch (JsonParseException exception) {
 
-            System.out.println("[ERR  - Utils] : JSON parsing error.");
+            System.out.println("JSON parsing error.");
             exception.printStackTrace();
 			return null;
         }
 		return responseJsonObject;
 	}
 
-	//Function that creates a JSON string starting from a map of the key-value pairs
 	public static String jsonToString(Map<String, Object> map){
 		String res;
 		res = (String) new Gson().toJson(map);
